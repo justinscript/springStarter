@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"> 
+<head>
+<title>Layout</title>
+<link rel="stylesheet" th:href="@{~/css/bootstrap.min.css}" href="/css/bootstrap.min.css" />
+<link rel="stylesheet" th:href="@{~/css/bootstrap-responsive.css}" href="/css/bootstrap-responsive.css" />
+<script type="text/javascript" src="/js/jquery-1.7.2.js"></script>
+<script type="text/javascript" src="/js/jquery.validate.js"></script>
+</head>
+<body>
+	<div class="container">
+		<div class="navbar ">
+			<div class="navbar-inner">
+				<a class="brand"
+					th:href="@{https://github.com/ultraq/thymeleaf-layout-dialect}">
+					Messages CRUD </a>
+				<ul class="nav">
+					<li><a th:href="@{~/message}" href="messages.html"> Messages </a></li>
+				</ul>
+			</div>
+		</div>
+		<h1 layout:fragment="header">Layout</h1>
+		<div layout:fragment="content">Fake content</div>
+	</div>
+</body>
+</html>

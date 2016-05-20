@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"> 
+<head>
+  <meta charset="utf-8"/>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+  <meta name="renderer" content="webkit"/>
+  <title>注册新账户</title>
+  <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport"/>
+  <link rel="stylesheet" th:href="@{~/css/admin/bootstrap/css/bootstrap.min.css}" href="/css/admin/bootstrap/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="http://cdn.bootcss.com/font-awesome/4.4.0/css/font-awesome.min.css"/>
+  <link rel="stylesheet" href="http://cdn.bootcss.com/ionicons/2.0.1/css/ionicons.min.css"/>
+  <link rel="stylesheet" th:href="@{~/css/admin/dist/css/AdminLTE.min.css}" href="/css/admin/dist/css/AdminLTE.min.css}"/>
+  <link rel="stylesheet" th:href="@{~/css/admin/dist/css/skins/skin-blue.min.css}" href="/css/admin/dist/css/skins/skin-blue.min.css}"/>
+  <!--[if lt IE 9]>
+  <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+  <![endif]-->
+</head>
+<body class="hold-transition login-page">
+<div class="login-box">
+  <div class="login-logo">
+    <a href="/">首页</a>
+  </div>
+  <!-- /.login-logo -->
+  <div class="login-box-body">
+    <p class="login-box-msg">注册一个新的账户</p>
+	<p th:if="${param.error}" class="login-box-msg" style="color: red;">短信验证码错误！</p>
+    <form action="${pageContext.request.contextPath}/user/doregister" method="post" id="register-form">
+      <div class="form-group has-feedback">
+        <input type="text" class="form-control" placeholder="手机号" name="phone"/>
+        <span class="glyphicon glyphicon-phone form-control-feedback"></span>
+      </div>
+      <div class="form-group">
+	      <div class="input-group">
+	        <input type="text" class="form-control" placeholder="短信验证码" name="phoneCode"/>
+	        <span class="input-group-btn">
+	          <button type="button" class="btn btn-info btn-flat xxg-btn-sendcode">发送短信验证码</button>
+	        </span>
+	      </div>
+      </div>
+      <div class="form-group has-feedback">
+        <input type="password" class="form-control" placeholder="密码" name="passwd"/>
+        <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+      </div>
+      <div class="row">
+        <div class="col-xs-8">
+        	<a href="/login">我已经注册过了，现在登录</a>
+        </div>
+        <!-- /.col -->
+        <div class="col-xs-4">
+          <button type="submit" class="btn btn-primary btn-block btn-flat">注册</button>
+        </div>
+        <!-- /.col -->
+      </div>
+    </form>
+    
+  </div>
+  <!-- /.login-box-body -->
+</div>
+<!-- /.login-box -->
+
+<script th:inline="javascript" th:if="${param.error}">
+alert("短信验证码错误");
+location.href = "/register";
+</script>
+
+<script src="/css/admin/plugins/jQuery/jQuery-2.1.4.min.js"></script>
+<script src="/css/admin/bootstrap/js/bootstrap.min.js"></script>
+<script th:inline="javascript">
+/*<![CDATA[*/
+$(document).ready(function() {
+	// send phone verify code
+	$(".xxg-btn-sendcode").click(function() {
+		if(!$(this).hasClass("disabled") && !$("input[name='phone']").parent().hasClass("has-error")) {
+			$(".xxg-btn-sendcode").addClass("disabled");
+			var phone = $("input[name='phone']").val();
+			$.ajax({
+				url: "/verifyphone",
+				type: "POST",
+				data: {phone: phone},
+				cache: false,
+				dataType: "json",
+				success: function(data) {
+					if(!data.success) {
+						showError($("input[name=phone]"), "用户已存在");
+						$(".xxg-btn-sendcode").removeClass("disabled");
+					}
+				},
+				error: function() {
+					alert("系统异常");
+					$(".xxg-btn-sendcode").removeClass("disabled");
+				}
+			});
+		}
+	});
+	function showError($input, msg) {
+		$input.attr("title", msg);
+		$input.tooltip({
+			placement: "right",
+			container: "body",
+			trigger: "manual"
+		}).tooltip('fixTitle').tooltip('show');
+		$input.parent().addClass("has-error");
+	}
+	function hideError($input) {
+		$input.tooltip('hide');
+		$input.parent().removeClass("has-error");
+	}
+	$("input[name='phone']").change(function() {
+		var $this = $(this);
+		var phone = $this.val();
+		if(!phone.match(/^1[0-9]{10}$/)) {
+			showError($this, "手机号不正确");
+			return;
+		}
+		hideError($this);
+		/* $.ajax({
+			url: "/user/userexist?phone=" + phone,
+			type: "GET",
+			cache: false,
+			dataType: "json",
+			success: function(data) {
+				if(data.exist) {
+					showError($this, "手机号已被注册");
+				} else {
+					hideError($this);
+				}
+			}
+		}); */
+	});
+	$("input[name='passwd']").change(function() {
+		
+		var $this = $(this);
+		var password = $this.val();
+		
+		if(password.length < 8) {
+			showError($this, "密码不能小于8位");
+			return;
+		}
+		hideError($this);
+	});
+	$("#register-form").submit(function() {
+		$("input[name='password']").change();
+		$("input[name='phone']").change();
+		if($(this).find(".has-error").length > 0) {
+			return false;
+		}
+	});
+});
+/*]]>*/
+</script>
+</body>
+</html>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"> 
+<head>
+  <meta charset="utf-8"/>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+  <meta name="renderer" content="webkit"/>
+  <title>登陆平台</title>
+  <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport"/>
+  <link rel="stylesheet" th:href="@{~/css/admin/bootstrap/css/bootstrap.min.css}" href="/css/admin/bootstrap/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="http://cdn.bootcss.com/font-awesome/4.4.0/css/font-awesome.min.css"/>
+  <link rel="stylesheet" href="http://cdn.bootcss.com/ionicons/2.0.1/css/ionicons.min.css"/>
+  <link rel="stylesheet" th:href="@{~/css/admin/dist/css/AdminLTE.min.css}" href="/css/admin/dist/css/AdminLTE.min.css}"/>
+  <link rel="stylesheet" th:href="@{~/css/admin/dist/css/skins/skin-blue.min.css}" href="/css/admin/dist/css/skins/skin-blue.min.css}"/>
+  <!--[if lt IE 9]>
+  <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+  <![endif]-->
+</head>
+<body class="hold-transition login-page" onload="document.forms[0].username.focus();">
+<div class="login-box">
+  <div class="login-logo">
+    <a href="/" style="font-family: 'Microsoft Yahei'">查询后台平台</a>
+  </div>
+  <!-- /.login-logo -->
+  <div class="login-box-body">
+    <p th:if="${param.error}" th:text="${param.error}" class="login-box-msg" style="color: red;">用户名或密码错误!</p> 
+    <form th:action="@{/login}" action="/login" method="post">
+      <div class="form-group has-feedback">
+        <input type="text" class="form-control" placeholder="用户名" name="username"/>
+        <span class="glyphicon glyphicon-user form-control-feedback"></span>
+      </div>
+      <div class="form-group has-feedback">
+        <input type="password" class="form-control" placeholder="密码" name="password"/>
+        <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+      </div>
+      <div class="form-group has-feedback">
+        <input style="float:left;width:200px;" type="text" class="form-control" placeholder="请输入图形验证码" name="code"/>
+        <img style="float:right;width:120px;height: 34px;" src="/verify/code" id="codeImg" onclick="this.src='/verify/code?t='+new Date().getTime()"/>
+      </div>
+      <br/><br/><br/>
+      <div class="row">
+        <div class="col-xs-8">
+        	<a href="/register" style="line-height: 30px;">注册新账户</a>
+        </div>
+        <!-- /.col -->
+        <div class="col-xs-4">
+          <button type="submit" class="btn btn-primary btn-block btn-flat">登录</button>
+        </div>
+        <!-- /.col -->
+      </div>
+    </form>
+  </div>
+  <!-- /.login-box-body -->
+</div>
+<!-- /.login-box -->
+</body>
+</html>

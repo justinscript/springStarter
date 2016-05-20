@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>com.msun.springStarter</groupId>
+    <artifactId>samples</artifactId>
+    <packaging>jar</packaging>
+    <version>3.0.8</version>
+    <name>springStarter-samples</name>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven.build.timestamp.format>yyyyMMddHH</maven.build.timestamp.format>
+        <maven.test.skip>true</maven.test.skip>
+        <downloadSources>true</downloadSources>
+        <java_source_version>1.7</java_source_version>
+        <java_target_version>1.7</java_target_version>
+        <file_encoding>UTF-8</file_encoding>
+        
+        <slf4j.version>1.6.6</slf4j.version>
+        <guava.version>18.0</guava.version>
+        <netty.version>4.1.0.Beta7</netty.version>
+        <commons-lang.version>2.6</commons-lang.version>
+        <spring.boot.version>1.2.7.RELEASE</spring.boot.version>
+    </properties>
+
+    <repositories>
+        <repository>
+            <id>oschina-repos</id>
+            <name>Oschina Releases</name>
+            <url>http://maven.oschina.net/content/groups/public</url>
+        </repository>
+        <repository>
+            <id>java-repos</id>
+            <name>Java Repository</name>
+            <url>http://download.java.net/maven/2/</url>
+        </repository>
+        <repository>
+            <id>central-repos</id>
+            <name>Central Repository</name>
+            <url>http://repo.maven.apache.org/maven2</url>
+        </repository>
+        <repository>
+            <id>central-repos2</id>
+            <name>Central Repository 2</name>
+            <url>http://repo1.maven.org/maven2/</url>
+        </repository>
+        <repository>
+            <id>Lawrence-zxc-maven-repo</id>
+            <url>https://raw.githubusercontent.com/Lawrence-zxc/maven-repo/master/repository</url>
+        </repository>
+    </repositories>
+
+   <dependencies>
+   		<!-- use netty boot -->
+   		<dependency>
+	      	<groupId>com.msun.springStarter</groupId>
+	    	<artifactId>springStarter</artifactId>
+	    	<version>3.0.8</version>
+    	</dependency>
+    	
+    	<!-- use jetty boot -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+			<version>${spring.boot.version}</version>
+			<type>jar</type>
+			<exclusions>
+				<exclusion>
+					<groupId>org.springframework.boot</groupId>
+					<artifactId>spring-boot-starter-tomcat</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.springframework.boot</groupId>
+					<artifactId>spring-boot-starter-logging</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.yaml</groupId>
+					<artifactId>snakeyaml</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-jetty</artifactId>
+			<version>${spring.boot.version}</version>
+			<type>jar</type>
+			<exclusions>
+				<exclusion>
+					<groupId>org.eclipse.jetty.websocket</groupId>
+					<artifactId>websocket-server</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.eclipse.jetty.websocket</groupId>
+					<artifactId>javax-websocket-server-impl</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.eclipse.jetty</groupId>
+					<artifactId>jetty-jsp</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+    	
+    	<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-security</artifactId>
+			<version>${spring.boot.version}</version>
+			<type>jar</type>
+		 </dependency>
+		 <dependency>
+		    <groupId>org.springframework.boot</groupId>
+		    <artifactId>spring-boot-starter-log4j</artifactId>
+		    <version>${spring.boot.version}</version>
+		    <type>jar</type>
+		 </dependency>
+		 
+		 <!-- template -->
+         <dependency>
+			<groupId>org.thymeleaf</groupId>
+			<artifactId>thymeleaf-spring4</artifactId>
+			<version>2.1.4.RELEASE</version>
+			<type>jar</type>
+		 </dependency>
+		 <dependency>
+			<groupId>nz.net.ultraq.thymeleaf</groupId>
+			<artifactId>thymeleaf-layout-dialect</artifactId>
+			<version>1.2.9</version>
+			<type>jar</type>
+		 </dependency>
+		 <!-- commons tools -->
+		 <dependency>
+            <groupId>com.lamfire</groupId>
+            <artifactId>lamfire</artifactId>
+            <version>2.3.18</version>
+         </dependency>
+		 <dependency>
+	        <groupId>com.google.guava</groupId>
+	        <artifactId>guava</artifactId>
+	        <version>${guava.version}</version>
+	        <type>jar</type>
+	     </dependency>
+	     <dependency>
+			<groupId>commons-io</groupId>
+			<artifactId>commons-io</artifactId>
+			<version>2.4</version>
+		 </dependency>
+   </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>2.3.2</version>
+                <configuration>
+                    <source>${java_source_version}</source>
+                    <target>${java_target_version}</target>
+                    <encoding>${file_encoding}</encoding>
+                    <showDeprecation>false</showDeprecation>
+                    <showWarnings>true</showWarnings>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>2.18</version>
+                <configuration>
+                    <includes>
+                        <include>**/*Test.java</include>
+                    </includes>
+                    <excludes>
+                        <exclude>**/*NoRunTest.java</exclude>
+                    </excludes>
+                    <!-- <skipTests>true</skipTests> -->
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-source-plugin</artifactId>
+                <version>2.4</version>
+                <executions>
+                    <execution>
+                        <id>attach-sources</id>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>2.4</version>
+                <configuration>
+                    <includes>
+                        <include>**/*.class</include>
+                    </includes>
+                    <excludes>
+                        <exclude>**/*Test.class</exclude>
+                    </excludes>
+                    <archive>
+						<addMavenDescriptor>true</addMavenDescriptor>
+					</archive>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>
