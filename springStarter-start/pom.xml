@@ -305,7 +305,7 @@
 	    <repository>
 	        <id>internal.repo</id>
 	        <name>Temporary Staging Repository</name>
-	        <url>file:/home/zxc/code/mvn-repo</url>
+	        <url>file:/home/zxc/code/maven-repo</url>
 	    </repository>
 	</distributionManagement>
 </project>

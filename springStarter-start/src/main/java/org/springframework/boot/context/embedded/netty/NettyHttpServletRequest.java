@@ -370,7 +370,12 @@ class NettyHttpServletRequest implements HttpServletRequest {
 
     @Override
     public String getScheme() {
-        return this.isSecure() ? "https" : "http";
+	try {
+	    return this.isSecure() ? "https" : "http";
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return "http";
     }
 
     @Override
