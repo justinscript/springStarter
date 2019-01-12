@@ -20,7 +20,7 @@ import org.springframework.web.servlet.ModelAndView;
 /**
  * 文件上传下载
  * 
- * @author zxc Apr 28, 2016 2:57:57 PM
+ * @author justinscript Apr 28, 2016 2:57:57 PM
  */
 @Controller
 public class FileController {
