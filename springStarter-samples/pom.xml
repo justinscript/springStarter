@@ -47,8 +47,8 @@
             <url>http://repo1.maven.org/maven2/</url>
         </repository>
         <repository>
-            <id>Lawrence-zxc-maven-repo</id>
-            <url>https://raw.githubusercontent.com/Lawrence-zxc/maven-repo/master/repository</url>
+            <id>justinscript-maven-repo</id>
+            <url>https://raw.githubusercontent.com/justinscript/maven-repo/master/repository</url>
         </repository>
     </repositories>
 
